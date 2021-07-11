@@ -3,19 +3,17 @@
 
 ## users テーブル
 
-| Column                | Type   | Options     |
-|-----------------------|--------|-------------|
-| nickname              | string | null: false |
-| email                 | string | null: false |
-| password              | string | null: false |
-| password_confirmation | string | null: false |
-| last_name             | string | null: false |
-| first_name            | string | null: false |
-| last_name_kana        | string | null: false |
-| first_name_kana       | string | null: false |
-| birth_date_1i         | date   | null:false  |
-| birth_date_2i         | date   | null:false  |
-| birth_date_3i         | date   | null:false  |
+| Column                | Type   | Options      |
+|-----------------------|--------|--------------|
+| nickname              | string | null: false  |
+| email                 | string | unique: true |
+| encrypted_password    | string | null: false  |
+| last_name             | string | null: false  |
+| first_name            | string | null: false  |
+| last_name_kana        | string | null: false  |
+| first_name_kana       | string | null: false  |
+| birth_date            | date   | null:false   |
+
 ### Association
 
 - has_many :items
@@ -23,17 +21,17 @@
 
 ## itemsテーブル
 
-| Column              | Type       | Options                        |
-|---------------------|------------|--------------------------------|
-| name                | string     | null: false                    |
-| info                | text       | null: false                    |
-| category            | string     | null: false                    |
-| sales_status        | string     | null: false                    |
-| shipping_fee_status | string     | null: false                    |
-| prefecture          | string     | null: false                    |
-| scheduled_delivery  | string     | null: false                    |
-| price               | integer    | null: false                    |
-| user                | references | null: false, foreign_key: true |
+| Column                 | Type       | Options                        |
+|------------------------|------------|--------------------------------|
+| name                   | string     | null: false                    |
+| info                   | text       | null: false                    |
+| category_id            | integer    | null: false                    |
+| sales_status_id        | integer    | null: false                    |
+| shipping_fee_status_id | integer    | null: false                    |
+| prefecture_id          | integer    | null: false                    |
+| scheduled_delivery-id  | integer    | null: false                    |
+| price                  | integer    | null: false                    |
+| user                   | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -52,19 +50,16 @@
 - belongs_to :item
 - has_one    :pay_form
 
-## pay_forms
+## pay_formsテーブル
 
 |Column        |Type        |Options                         |
 |--------------|------------|--------------------------------|
-| number       | integer    | null: false                    |
-| exp_month    | date       | null: false                    |
-| exp_year     | date       | null: false                    |
-| cvc          | integer    | null: false                    |
-| postal_code  | integer    | null: false                    |
+| postal_code  | string     | null: false                    |
+| prefecture   | string     | null: false                    |
 | city         | string     | null: false                    | 
-| addresses    | string     | null: false                    |
+| house_number | string     | null: false                    |
 | building     | string     |                                |
-| phone_number | integer    | null: false                    |
+| phone_number | string     | null: false                    |
 | order        | references | null: false, foreign_key: true |
 
 ### Association
