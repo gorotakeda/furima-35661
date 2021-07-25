@@ -14,7 +14,7 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address).to be_valid
       end
     end
-    context '購入者情報が登録できないとき'do
+    context '購入者情報が登録できないとき' do
       it 'postal_codeが空だと保存できないこと' do
         @order_address.postal_code = ''
         @order_address.valid?
@@ -23,7 +23,7 @@ RSpec.describe OrderAddress, type: :model do
       it 'postal_codeがハイフン無しでは登録できないこと' do
         @order_address.postal_code = '4880001'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Postal code is invalid. Enter it as follows (e.g. 123-4567)")
+        expect(@order_address.errors.full_messages).to include('Postal code is invalid. Enter it as follows (e.g. 123-4567)')
       end
       it 'prefecture_idが選択されていなければ登録できないこと' do
         @order_address.prefecture_id = ''
@@ -48,14 +48,14 @@ RSpec.describe OrderAddress, type: :model do
       it 'phone_numberが数字以外の文字が含まれていると登録できないこと' do
         @order_address.phone_number = '090-7694-2240'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number Input only number")
+        expect(@order_address.errors.full_messages).to include('Phone number Input only number')
       end
-      it 'phone_numberが9桁以下では登録できないこと'do
-        @order_address.phone_number ='090769422'
+      it 'phone_numberが9桁以下では登録できないこと' do
+        @order_address.phone_number = '090769422'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number  is too short ")
+        expect(@order_address.errors.full_messages).to include('Phone number  is too short ')
       end
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
