@@ -6,12 +6,14 @@ class OrderAddress
 
   with_options presence: true do
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Enter it as follows (e.g. 123-4567)' }
-    validates :prefecture_id
+    validates :prefecture_id, numericality: { other_than: 0 }
     validates :city
     validates :house_number
     validates :phone_number, numericality: { only_integer: true, message: 'Input only number' },
                              format: { with: /\A\d{10}$|^\d{11}\z/, message: ' is too short ' }
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   def save
